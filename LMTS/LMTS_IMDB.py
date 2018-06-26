@@ -20,11 +20,15 @@ numpy.random.seed(7)
 top_words = 5000
 (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=top_words)
 
+# see the shape
+print(x_train.shape)
+print(x_train[0])
+
 # truncate and pad input sequences
 max_review_length = 5000
 x_train = sequence.pad_sequences(x_train, maxlen=max_review_length)
 x_test = sequence.pad_sequences(x_test, maxlen=max_review_length)
-
+'''
 # create the dense network model
 embedding_vector_length = 32
 model = Sequential()
@@ -48,13 +52,14 @@ hist = model.fit(x_train, y_train,
 # Final evaluation of the models
 scores = model.evaluate(x_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
-
-# save model
+'''
+# save/load model
 from keras.models import load_model
 filename = 'conv1D.h5'
-model.save(filename)
+#model.save(filename)
 model = load_model(filename)
 
+'''
 # see the history
 import matplotlib.pyplot as plt
 fig, loss_ax = plt.subplots()
@@ -69,3 +74,4 @@ acc_ax.set_ylabel('accuray')
 loss_ax.legend(loc='upper left')
 acc_ax.legend(loc='lower left')
 plt.show()
+'''
